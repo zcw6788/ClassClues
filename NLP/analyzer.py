@@ -1,4 +1,4 @@
-import pdfReader
+import pdfreader
 import textEdit
 from ltp import LTP
 import time
