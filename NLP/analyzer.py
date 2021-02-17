@@ -163,7 +163,7 @@ def itemPruning(cluster):
 start = time.time()
 ltp = LTP()
 
-path=pdfReader.getPath()
+path=pdfreader.getPath()
 # new_path=path.replace("pdf","txt")
 # pdfReader.parse(path,new_path)
 # sentences=textEdit.readText(new_path)

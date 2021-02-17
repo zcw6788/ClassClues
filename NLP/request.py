@@ -1,10 +1,10 @@
-import requests#需要安装requests模块，详情百度pip安装
-import json#下面会用到
+import requests
+import json
 
 proxies = {'http': 'http://localhost:8888', 'https': 'http://localhost:8888'}
 #设置代理
 url='http://shuyantech.com/api/cndbpedia/avpair?q=下推自动机'
-url='https://api.ownthink.com/kg/knowledge?entity=PDA'
+url='https://api.ownthink.com/kg/knowledge?entity=天体测量学'
 # url='https://nlp.tencentcloudapi.com/?Action=WordEmbedding&Version=2019-04-08&Text="自然语言处理"'
 
 

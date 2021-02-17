@@ -1,9 +1,14 @@
 import tkinter.filedialog
-from pdfminer.pdfparser import PDFParser, PDFDocument
+# from pdfminer.pdfparser import PDFParser, PDFDocument
+
+from pdfminer.pdfparser import PDFParser
+from pdfminer.pdfdocument import PDFDocument, PDFTextExtractionNotAllowed
+from pdfminer.pdfpage import PDFPage
+
 from pdfminer.pdfinterp import PDFResourceManager, PDFPageInterpreter
 from pdfminer.converter import PDFPageAggregator
 from pdfminer.layout import LTTextBoxHorizontal, LAParams
-from pdfminer.pdfinterp import PDFTextExtractionNotAllowed
+# from pdfminer.pdfinterp import PDFTextExtractionNotAllowed
 
 
 
@@ -18,12 +23,12 @@ def parse(path,new_path):#读取pdf内容并转化为文本
     # 用文件对象来创建一个pdf文档分析器
     praser = PDFParser(fp)
     # 创建一个PDF文档
-    doc = PDFDocument()
+    doc = PDFDocument(praser)
     # 连接分析器 与文档对象
-    praser.set_document(doc)
-    doc.set_parser(praser)
+    # praser.set_document(doc)
+    # doc.set_parser(praser)
     # 提供初始化密码,如果没有密码 就创建一个空的字符串
-    doc.initialize()
+    # doc.initialize()
 
     # 检测文档是否提供txt转换，不提供就忽略
     if not doc.is_extractable:
@@ -38,7 +43,7 @@ def parse(path,new_path):#读取pdf内容并转化为文本
         interpreter = PDFPageInterpreter(rsrcmgr, device)
         length_list = []
 
-        for page in doc.get_pages():  # doc.get_pages() 获取page列表
+        for page in PDFPage.create_pages(doc):  # doc.get_pages() 获取page列表
             interpreter.process_page(page)
             # 接受该页面的LTPage对象
             layout = device.get_result()
@@ -50,4 +55,6 @@ def parse(path,new_path):#读取pdf内容并转化为文本
                         # print(results)
                         length_list.append(len(results))
                         f.write(results + '\n')
-
+path=getPath()
+new_path=path.replace("pdf","txt")
+parse(path,new_path)
