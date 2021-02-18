@@ -9,13 +9,42 @@ from pdfminer.pdfinterp import PDFResourceManager, PDFPageInterpreter
 from pdfminer.converter import PDFPageAggregator
 from pdfminer.layout import LTTextBoxHorizontal, LAParams
 # from pdfminer.pdfinterp import PDFTextExtractionNotAllowed
+from numpy import median
 
+import re
 
+#精细中文分句
+def cut_sent(para):
+    para = re.sub('([。！？\?])([^”’])', r"\1\n\2", para)  # 单字符断句符
+    para = re.sub('(\.{6})([^”’])', r"\1\n\2", para)  # 英文省略号
+    para = re.sub('(\…{2})([^”’])', r"\1\n\2", para)  # 中文省略号
+    para = re.sub('([。！？\?][”’])([^，。！？\?])', r'\1\n\2', para)
+    # 如果双引号前有终止符，那么双引号才是句子的终点，把分句符\n放到双引号后，注意前面的几句都小心保留了双引号
+    para = para.rstrip()  # 段尾如果有多余的\n就去掉它
+    # 很多规则中会考虑分号;，但是这里我把它忽略不计，破折号、英文双引号等同样忽略，需要的再做些简单调整即可。
+    return para.split("\n")
+
+def tidySentence(content):
+    content['Title']=cut_sent(content['Title'])
+    content['Text'] = cut_sent(content['Text'])
+    return content
 
 # 从图形界面中获取路径
 def getPath():
     path = tkinter.filedialog.askopenfilename()
     return path
+
+#获取标题大小的边界
+def getTitleBound(layout):
+    lengthList = []
+    for x in layout:
+        if(x.height<100):
+            lengthList.append(x.height)
+    lengthList = list(set(lengthList))
+    if(len(lengthList)):
+        return median(lengthList)
+    else:
+        return 0
 
 
 def parse(path,new_path):#读取pdf内容并转化为文本
@@ -41,20 +70,40 @@ def parse(path,new_path):#读取pdf内容并转化为文本
         device = PDFPageAggregator(rsrcmgr, laparams=laparams)
         # 创建一个PDF解释器对象
         interpreter = PDFPageInterpreter(rsrcmgr, device)
-        length_list = []
-
+        # length_list = []
+        content = {'Title': "", 'Text': ""}
         for page in PDFPage.create_pages(doc):  # doc.get_pages() 获取page列表
             interpreter.process_page(page)
             # 接受该页面的LTPage对象
             layout = device.get_result()
+            bound=getTitleBound(layout)
+
             for x in layout:
                 if (isinstance(x, LTTextBoxHorizontal)):
-                    # 需要写出编码格式
-                    with open(new_path, 'a', encoding='utf-8') as f:
-                        results = x.get_text()
+                    results = x.get_text()
+                    if (x.height > bound):
+                        #标题一般没有明显的分割
+                        content['Title']=content['Title']+results.replace(' ','')
+                    else:
+                        content['Text']=content['Text']+results.replace('\n','').replace(' ','')
+        content=tidySentence(content)
+        return content
+                #     # 需要写出编码格式
+                #     with open(new_path, 'a', encoding='utf-8') as f:
+                #         results = x.get_text()
                         # print(results)
-                        length_list.append(len(results))
-                        f.write(results + '\n')
+                        # length_list.append(len(results))
+                        # if(x.height>bound):
+                        #     f.write('**'+results+'**')
+                        # else:
+                        #     f.write(results)
+
+
+
+
+
+
+
 path=getPath()
 new_path=path.replace("pdf","txt")
 parse(path,new_path)
