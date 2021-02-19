@@ -72,13 +72,15 @@ def parse(path):#读取pdf内容并转化为文本
         interpreter = PDFPageInterpreter(rsrcmgr, device)
         # length_list = []
         content = {'Title': "", 'Text': ""}
+        # 设计一个变量用于标题的对其
+        titleCount = 0
         for page in PDFPage.create_pages(doc):  # doc.get_pages() 获取page列表
             interpreter.process_page(page)
             # 接受该页面的LTPage对象
             layout = device.get_result()
             bound=getTitleBound(layout)
-            #设计一个变量用于标题的对其
-            titleCount=0
+
+
             for x in layout:
                 if (isinstance(x, LTTextBoxHorizontal)):
                     results = x.get_text()
@@ -86,9 +88,9 @@ def parse(path):#读取pdf内容并转化为文本
                         #标题一般没有明显的分割
                         titleCount+=1
                         content['Title']=str(titleCount)+'**'+content['Title']+results.replace(' ','')
-                        content = content['Text'] + '\n'+str(titleCount)+'\n'
+                        content['Text'] = content['Text'] + '\n'+str(titleCount)+'\n'
                     else:
-                        content=content['Text']+results.replace('\n','').replace(' ','')
+                        content['Text']=content['Text']+results.replace('\n','').replace(' ','')
         content=tidySentence(content)
         return content
                 #     # 需要写出编码格式
