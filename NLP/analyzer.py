@@ -163,11 +163,11 @@ def itemPruning(cluster):
 start = time.time()
 ltp = LTP()
 
-path=pdfreader.getPath()
+# path=pdfreader.getPath()
 # new_path=path.replace("pdf","txt")
 # pdfReader.parse(path,new_path)
 # sentences=textEdit.readText(new_path)
-sentences=ltp.sent_split([textEdit.readText(path)])
+# sentences=ltp.sent_split([textEdit.readText(path)])
 #进一步对字符串进行拆分
 # for ele in sentences:
 #     temp= textEdit.splitText(ele)
@@ -177,6 +177,7 @@ sentences=ltp.sent_split([textEdit.readText(path)])
 #         for i in range(1,len(temp)-1):
 #             sentences.insert(index+i,temp[i])
 
+sentences= pdfreader.getTestFromPdf()['Text']
 seg=[]
 sdp=[]
 dep=[]

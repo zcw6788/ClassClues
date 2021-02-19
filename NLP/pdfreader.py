@@ -47,7 +47,7 @@ def getTitleBound(layout):
         return 0
 
 
-def parse(path,new_path):#读取pdf内容并转化为文本
+def parse(path):#读取pdf内容并转化为文本
     fp = open(path, 'rb')
     # 用文件对象来创建一个pdf文档分析器
     praser = PDFParser(fp)
@@ -77,15 +77,18 @@ def parse(path,new_path):#读取pdf内容并转化为文本
             # 接受该页面的LTPage对象
             layout = device.get_result()
             bound=getTitleBound(layout)
-
+            #设计一个变量用于标题的对其
+            titleCount=0
             for x in layout:
                 if (isinstance(x, LTTextBoxHorizontal)):
                     results = x.get_text()
                     if (x.height > bound):
                         #标题一般没有明显的分割
-                        content['Title']=content['Title']+results.replace(' ','')
+                        titleCount+=1
+                        content['Title']=str(titleCount)+'**'+content['Title']+results.replace(' ','')
+                        content = content['Text'] + '\n'+str(titleCount)+'\n'
                     else:
-                        content['Text']=content['Text']+results.replace('\n','').replace(' ','')
+                        content=content['Text']+results.replace('\n','').replace(' ','')
         content=tidySentence(content)
         return content
                 #     # 需要写出编码格式
@@ -99,11 +102,11 @@ def parse(path,new_path):#读取pdf内容并转化为文本
                         #     f.write(results)
 
 
+def getTestFromPdf():
+    path = getPath()
+    new_path = path.replace("pdf", "txt")
+    return parse(path)
 
 
 
 
-
-path=getPath()
-new_path=path.replace("pdf","txt")
-parse(path,new_path)
