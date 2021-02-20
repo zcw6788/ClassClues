@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="98187160-eeb4-4434-8ae3-69c8b53a87cf" name="Default Changelist" comment="完善pdf中内容读取部分">
-      <change afterPath="$PROJECT_DIR$/old_code.py" afterDir="false" />
+    <list default="true" id="98187160-eeb4-4434-8ae3-69c8b53a87cf" name="Default Changelist" comment="使用ltp库完成了三元组的划分，但还是会有愚蠢的错误QAQ">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/analyzer.py" beforeDir="false" afterPath="$PROJECT_DIR$/analyzer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pdfreader.py" beforeDir="false" afterPath="$PROJECT_DIR$/pdfreader.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -117,7 +115,7 @@
       <workItem from="1613529473549" duration="9835000" />
       <workItem from="1613571852341" duration="2116000" />
       <workItem from="1613613358790" duration="5715000" />
-      <workItem from="1613633218052" duration="27422000" />
+      <workItem from="1613633218052" duration="29197000" />
     </task>
     <task id="LOCAL-00001" summary="demo">
       <created>1613529766804</created>
@@ -154,7 +152,14 @@
       <option name="project" value="LOCAL" />
       <updated>1613699275371</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="使用ltp库完成了三元组的划分，但还是会有愚蠢的错误QAQ">
+      <created>1613743407421</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1613743407421</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -176,7 +181,8 @@
     <MESSAGE value="demo" />
     <MESSAGE value="pdfreader" />
     <MESSAGE value="完善pdf中内容读取部分" />
-    <option name="LAST_COMMIT_MESSAGE" value="完善pdf中内容读取部分" />
+    <MESSAGE value="使用ltp库完成了三元组的划分，但还是会有愚蠢的错误QAQ" />
+    <option name="LAST_COMMIT_MESSAGE" value="使用ltp库完成了三元组的划分，但还是会有愚蠢的错误QAQ" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -188,13 +194,18 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/analyzer.py</url>
-          <line>159</line>
+          <line>160</line>
           <option name="timeStamp" value="35" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/analyzer.py</url>
-          <line>151</line>
+          <line>152</line>
           <option name="timeStamp" value="36" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/analyzer.py</url>
+          <line>150</line>
+          <option name="timeStamp" value="48" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -209,7 +220,7 @@
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/untitled21$pdfReader.coverage" NAME="analyzer Coverage Results" MODIFIED="1606567550897" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/untitled21$analyzer.coverage" NAME="analyzer Coverage Results" MODIFIED="1607765109182" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/NLP$request.coverage" NAME="analyzer Coverage Results" MODIFIED="1613743246848" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/NLP$request.coverage" NAME="analyzer Coverage Results" MODIFIED="1613788815184" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/NLP$pdfreader.coverage" NAME="pdfreader Coverage Results" MODIFIED="1613626082145" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

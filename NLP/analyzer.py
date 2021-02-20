@@ -7,10 +7,10 @@ def getHEA(dep,seg):
     tempHEAword=[]
     for item in dep:
         if item[2] == "HED":
-            tempHEAword.append(seg[item[0] - 1])
+            tempHEAword.append(item[0] - 1)
     for item in dep:
-        if item[2] == "COO" and (seg[item[1] - 1] in tempHEAword) :
-            tempHEAword.append(seg[item[0] - 1])
+        if item[2] == "COO" and (item[1] - 1 in tempHEAword) :
+            tempHEAword.append(item[0] - 1)
     return tempHEAword
 
 #判断某词是否满足关键词的基本条件
@@ -82,7 +82,7 @@ def getTriad(dep,seg,pos):
     HEAword=getHEA(dep,seg)
     result=[]
     for HEAItem in HEAword:
-        p=seg.index(HEAItem)+1
+        p=HEAItem+1
         #默认是不存在主语与宾语
         subjectPosition=objectPosition=-1
         #先找到句子的主语与宾语
@@ -103,7 +103,7 @@ def getTriad(dep,seg,pos):
         if(stsus=='a' and objectPosition!=-1):
             result.append([seg[ATTPosition-1],seg[subjectPosition-1],expandWord(seg[objectPosition-1],dep,seg)])
         elif(stsus=='v' and objectPosition!=-1 and subjectPosition!=-1):
-            result.append([seg[subjectPosition - 1], HEAItem, expandWord(seg[objectPosition - 1],dep,seg)])
+            result.append([seg[subjectPosition - 1], seg[HEAItem], expandWord(seg[objectPosition - 1],dep,seg)])
         #接着将宾语中的名词提取出来
         if(objectPosition!=-1 and subjectPosition!=-1):
             for index in range(getBeginPosition(seg[objectPosition-1],dep,seg)-1,objectPosition):
@@ -146,9 +146,10 @@ for st in sentences:
         #获得语法依存关系
         dep.append(ltp.dep(hidden)[0])
         result1=[]
-    for index in range(len(dep)):
-        r=getTriad(dep[index],seg[index],pos[index])
-        result1.append(r)
+for index in range(len(dep)):
+    r=getTriad(dep[index],seg[index],pos[index])
+    # r = getTriad(dep[8], seg[8], pos[8])
+    result1.append(r)
 # r=getTriad(dep[7],seg[7],pos[7])
 
 #获取主要谓语成分
