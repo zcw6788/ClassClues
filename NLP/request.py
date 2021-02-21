@@ -16,4 +16,15 @@ def getDBpedia(str):
     jsonFile=json.loads(response.text)
     return jsonFile
 
-getDBpedia("宇宙学")
+#将获取的json文件转化成三元组
+def json2triad(jsonFile):
+    result=[]
+    if(jsonFile['message']=='success'):
+        entity=jsonFile['data']['entity']
+        for item in jsonFile['data']['avp']:
+            result.append([entity,item[0],item[1]])
+    return result
+
+
+
+json2triad(getDBpedia("宇宙学"))

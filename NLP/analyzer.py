@@ -3,6 +3,7 @@ import textEdit
 from ltp import LTP
 import time
 
+#获取句子依存关系中的中心词
 def getHEA(dep,seg):
     tempHEAword=[]
     for item in dep:
@@ -28,6 +29,7 @@ def isQualified(word):
     elif word.isalnum():
         return True
 
+#筛选出关键词中的噪声
 def standardizationKeyword(keyword):
     #过滤掉关键词中的标点
     punc = "~!@#$%^&*()_+-*/<>,.[]\/，。：“”\'\""
@@ -57,6 +59,7 @@ def getBeginPosition(word,dep,seg):
 
 
 #将连续的词语拼接成句子
+#所使用的标号是dep中的对应标号
 def getTogether(seg,beginPosition,endPosition):
     str = seg[beginPosition-1]
     # 将涉及的词语拼接成句子
@@ -81,6 +84,8 @@ def getTriad(dep,seg,pos):
     #首先获取主谓之间的关系
     HEAword=getHEA(dep,seg)
     result=[]
+
+    #先处理主谓宾关系的句子
     for HEAItem in HEAword:
         p=HEAItem+1
         #默认是不存在主语与宾语
@@ -109,8 +114,35 @@ def getTriad(dep,seg,pos):
             for index in range(getBeginPosition(seg[objectPosition-1],dep,seg)-1,objectPosition):
                 if(pos[index-1]=='n'):
                     result.append([expandWord(seg[objectPosition-1],dep,seg),'包含',seg[index-1]])
+
+    #接着处理使用冒号表示其含义的句子
+    str1=str2=' '
+    beginPosition=-1
+    for item in dep:
+        if(item[2]=='WP' and (seg[item[0]-1]==':' or seg[item[0]-1]=='：')):
+            str1=getTogether(seg,1,item[0]-1)
+            str2=getTogether(seg,item[1]+2,len(seg))
+            beginPosition=item[1]
+            break
+    if(str1!=' ' and str2!=' '):
+        result.append([str1,"定义",str2])
+        for index in range(beginPosition+2,len(seg)):
+            if(pos[index-1]=='n'):
+                result.append([str2, "包含",seg[index-1]])
     return result
 
+#利用句法分析返回句子中的名词
+def resolveNouns(ltp,str):
+    seg_temp, hidden = ltp.seg([str])
+    # 获得词性列表
+    pos=ltp.pos(hidden)[0]
+    # 获得分词列表
+    seg=seg_temp[0]
+    result=[]
+    for index in range(len(pos)):
+        if(pos[index]=='n'):
+            result.append(seg[index])
+    return result
 
 
 
