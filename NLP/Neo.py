@@ -1,4 +1,6 @@
-from py2neo import Node, Relationship,Graph
+import py2neo
+from py2neo import Node, Relationship, Graph, NodeMatcher
+
 
 #连接上neo4j数据库
 def getConnection():
@@ -8,6 +10,13 @@ def getConnection():
         password="ASDasd123"
     )
     return graph
+
+#区分词语与句子
+def getClass(str):
+    if(len(str)>3):
+        return "Sentence"
+    else:
+        return "Word"
 
 #新建一个节点
 def createNode(category,name):
@@ -23,19 +32,22 @@ def addAttributes(node,attrName,attrValue):
 
 #将数据写入数据库
 def writeToNeo4j(graph,a):
-    graph.create(a)
+    matcher = NodeMatcher(graph)
+    a = matcher.match(getClass(a[0]), content=a[0]).first()
+    if (a == None):
+        a = Node(getClass(a[0]), content=a[0])
+    b = matcher.match(getClass(a[1]), content=a[1]).first()
+    if (b == None):
+        b = Node(getClass(a[1]), content=a[1])
+    r = Relationship(a, a[1], b)
+    s = a | b | r
+    graph.create(s)
     return
 
-a = Node("Person", name="Alice")
-b = Node("Person", name="Bob")
-r = Relationship(a, "KNOWS", b)
-s = a | b | r
-test_graph=getConnection()
+#删除数据库中所有数据
+def deleteAllData(graph):
+    graph.run('match (n) detach delete n')
+    return
 
-#往数据库中写入数据
-# test_graph.create(s)
-
-#从数据库中查找数据
-# data = test_graph.run('MATCH (p:Person) return p').data()
-# print(data)
-
+graph=getConnection()
+deleteAllData(graph)

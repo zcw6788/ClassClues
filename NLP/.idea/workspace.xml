@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="98187160-eeb4-4434-8ae3-69c8b53a87cf" name="Default Changelist" comment="修复并列的关键词识别不出的问题">
+    <list default="true" id="98187160-eeb4-4434-8ae3-69c8b53a87cf" name="Default Changelist" comment="自然语言处理部分基本完成">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/analyzer.py" beforeDir="false" afterPath="$PROJECT_DIR$/analyzer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/request.py" beforeDir="false" afterPath="$PROJECT_DIR$/request.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Neo.py" beforeDir="false" afterPath="$PROJECT_DIR$/Neo.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,7 +67,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/request.py" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Neo.py" />
     <property name="settings.editor.selected.configurable" value="preferences.editor" />
   </component>
   <component name="RecentsManager">
@@ -77,7 +76,7 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration name="request" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+    <configuration name="Neo" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="untitled21" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -90,7 +89,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/request.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Neo.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -128,7 +127,8 @@
       <workItem from="1613571852341" duration="2116000" />
       <workItem from="1613613358790" duration="5715000" />
       <workItem from="1613633218052" duration="30937000" />
-      <workItem from="1613867951977" duration="8610000" />
+      <workItem from="1613867951977" duration="10807000" />
+      <workItem from="1613958860593" duration="6190000" />
     </task>
     <task id="LOCAL-00001" summary="demo">
       <created>1613529766804</created>
@@ -179,7 +179,14 @@
       <option name="project" value="LOCAL" />
       <updated>1613788927960</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="自然语言处理部分基本完成">
+      <created>1613906207901</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1613906207901</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -203,7 +210,8 @@
     <MESSAGE value="完善pdf中内容读取部分" />
     <MESSAGE value="使用ltp库完成了三元组的划分，但还是会有愚蠢的错误QAQ" />
     <MESSAGE value="修复并列的关键词识别不出的问题" />
-    <option name="LAST_COMMIT_MESSAGE" value="修复并列的关键词识别不出的问题" />
+    <MESSAGE value="自然语言处理部分基本完成" />
+    <option name="LAST_COMMIT_MESSAGE" value="自然语言处理部分基本完成" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -243,6 +251,7 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/untitled21$pdfReader.coverage" NAME="analyzer Coverage Results" MODIFIED="1606567550897" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/NLP$Neo.coverage" NAME="Neo Coverage Results" MODIFIED="1613965361100" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/untitled21$analyzer.coverage" NAME="analyzer Coverage Results" MODIFIED="1607765109182" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/NLP$request.coverage" NAME="request Coverage Results" MODIFIED="1613875214353" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/NLP$pdfreader.coverage" NAME="pdfreader Coverage Results" MODIFIED="1613626082145" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
