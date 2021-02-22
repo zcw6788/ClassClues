@@ -49,5 +49,5 @@ def deleteAllData(graph):
     graph.run('match (n) detach delete n')
     return
 
-graph=getConnection()
-deleteAllData(graph)
+# graph=getConnection()
+# deleteAllData(graph)
