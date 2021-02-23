@@ -144,51 +144,8 @@ def resolveNouns(ltp,str):
             result.append(seg[index])
     return result
 
-
-
-
-
-
-
-#设置代理
-proxies = {'http': 'http://localhost:8888', 'https': 'http://localhost:8888'}
-
-start = time.time()
-ltp = LTP(proxies=proxies)
-
-
-
-sentences= pdfreader.getTestFromPdf()['Text']
-seg=[]
-sdp=[]
-dep=[]
-pos=[]
-cluster=[]
-
-#对句子进行分词以及语义依存分析
-for st in sentences:
-    if(st!=''):
-        seg_temp, hidden = ltp.seg([st])
-        #  获得语义依存关系
-        sdp.append(ltp.sdp(hidden)[0])
-        #获得词性列表
-        pos.append(ltp.pos(hidden)[0])
-        #获得分词列表
-        seg.append(seg_temp[0])
-        #获得语法依存关系
-        dep.append(ltp.dep(hidden)[0])
-        result1=[]
-for index in range(len(dep)):
-    r=getTriad(dep[index],seg[index],pos[index])
-    # r = getTriad(dep[8], seg[8], pos[8])
-    result1.append(r)
-# r=getTriad(dep[7],seg[7],pos[7])
-
-#获取主要谓语成分
-# HEAlist = getHEA(dep, seg)
-#获取关键词表
-
-
-
-end = time.time()
-print (end-start)
+#处理从视频、图片中返回的信号
+def processTimeData(ltp,list):
+    for item in list:
+        item[1]=resolveNouns(ltp,item[1])
+    return list

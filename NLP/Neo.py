@@ -1,12 +1,7 @@
-import py2neo
-from requests import *
 from py2neo import Node, Relationship, Graph, NodeMatcher
 
 
 #连接上neo4j数据库
-from request import json2triad, getDBpedia
-
-
 def getConnection():
     graph = Graph(
         "http://localhost:7474",
@@ -53,9 +48,3 @@ def deleteAllData(graph):
     graph.run('match (n) detach delete n')
     return
 
-graph=getConnection()
-deleteAllData(graph)
-data=json2triad(getDBpedia("宇宙学"))
-for item in data:
-    writeToNeo4j(graph, item)
-# deleteAllData(graph)

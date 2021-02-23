@@ -20,9 +20,10 @@ def getDBpedia(str):
 def json2triad(jsonFile):
     result=[]
     if(jsonFile['message']=='success'):
-        entity=jsonFile['data']['entity']
-        for item in jsonFile['data']['avp']:
-            result.append([entity,item[0],item[1]])
+        if ('entity' in jsonFile['data']):
+            entity=jsonFile['data']['entity']
+            for item in jsonFile['data']['avp']:
+                result.append([entity,item[0],item[1]])
     return result
 
 
