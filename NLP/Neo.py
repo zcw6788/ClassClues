@@ -3,12 +3,11 @@ from py2neo import Node, Relationship, Graph, NodeMatcher
 
 #连接上neo4j数据库
 def getConnection():
-    graph = Graph(
+    return Graph(
         "http://localhost:7474",
         username="neo4j",
         password="ASDasd123"
     )
-    return graph
 
 #区分词语与句子
 def getClass(str):
@@ -33,10 +32,10 @@ def addAttributes(node,attrName,attrValue):
 def writeToNeo4j(graph,a):
     matcher = NodeMatcher(graph)
     x = matcher.match(getClass(a[0]), content=a[0]).first()
-    if (x == None):
+    if x is None:
         x = Node(getClass(a[0]), content=a[0])
     y = matcher.match(getClass(a[2]), content=a[2]).first()
-    if (y == None):
+    if y is None:
         y = Node(getClass(a[2]), content=a[2])
     r = Relationship(x, a[1], y)
     s = x | y | r
